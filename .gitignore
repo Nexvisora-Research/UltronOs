@@ -72,3 +72,8 @@ coverage.xml
 venv/
 env/
 .venv/
+
+# Project planning
+Roadmap.md
+summary.md
+docs/

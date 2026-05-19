@@ -35,14 +35,23 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Dependency check
-DEPS=(debootstrap xorriso mksquashfs rsync grub-pc-bin grub-efi-amd64-bin isolinux)
+check_dep() {
+    dpkg-query -W -f='${Status}' "$1" 2>/dev/null | grep -q "install ok installed"
+}
+
+DEPS=(debootstrap xorriso squashfs-tools rsync grub-pc-bin grub-efi-amd64-bin isolinux syslinux-common)
+MISSING=()
 for dep in "${DEPS[@]}"; do
-    if ! dpkg -l "$dep" &>/dev/null; then
-        err "Missing dependency: $dep"
-        echo "Install with: sudo apt install ${DEPS[*]}"
-        exit 1
+    if ! check_dep "$dep"; then
+        MISSING+=("$dep")
     fi
 done
+
+if [ ${#MISSING[@]} -gt 0 ]; then
+    err "Missing dependencies: ${MISSING[*]}"
+    echo "Install with: sudo apt install ${MISSING[*]}"
+    exit 1
+fi
 
 # Clean previous build
 log "Cleaning previous build..."
@@ -97,6 +106,10 @@ set -e
 # Prevent interactive prompts
 export DEBIAN_FRONTEND=noninteractive
 
+# Install prerequisites first
+apt update
+apt install -y software-properties-common curl gpg
+
 # Add Universe repository
 apt-add-repository universe -y
 
@@ -127,7 +140,7 @@ apt install -y \
     gimp inkscape eog
 
 # Add Brave Browser repository
-apt install -y curl
+mkdir -p /usr/share/keyrings
 curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg \
     https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" \

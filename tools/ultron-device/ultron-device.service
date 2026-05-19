@@ -1,0 +1,25 @@
+[Unit]
+Description=Ultron Device Manager Service
+Documentation=man:ultron-device(1)
+After=systemd-udevd.service
+Wants=systemd-udevd.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ultron-device --daemon
+Restart=on-failure
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+StandardOutput=journal
+StandardError=journal
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/var/lib/ultron-device /tmp /dev
+PrivateTmp=true
+DevicePolicy=auto
+
+[Install]
+WantedBy=default.target

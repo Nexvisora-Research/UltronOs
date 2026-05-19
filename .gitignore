@@ -1,0 +1,74 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+
+# GNOME / GTK
+*.gresource
+*.gresource.xml
+*.ui~
+*.css~
+
+# IDE / Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+build/build.log
+tests/test_results.log
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+
+# Local configuration (keep templates, ignore user-specific)
+*.local
+*.user
+
+# Compiled binaries
+*.o
+*.a
+*.so
+*.dylib
+
+# Meson / Ninja build dirs
+meson-private/
+meson-info/
+meson-logs/
+
+# System files
+/etc/ultron/
+/var/log/ultron/
+/var/lib/ultron/
+~/.config/ultron/nexvisora/
+~/.local/share/ultron/nexvisora/
+
+# Coverage / Testing
+.coverage
+htmlcov/
+.pytest_cache/
+coverage.xml
+*.cover
+
+# Virtual environments
+venv/
+env/
+.venv/

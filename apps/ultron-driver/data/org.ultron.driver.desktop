@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Ultron Driver Manager
+Comment=Manage hardware drivers
+Exec=/usr/bin/ultron-driver
+Icon=org.ultron.driver
+Terminal=false
+Type=Application
+Categories=System;Settings;GTK;
+Keywords=driver;hardware;nvidia;amd;intel;

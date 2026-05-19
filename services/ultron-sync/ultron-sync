@@ -1,0 +1,67 @@
+#!/usr/bin/env python3
+import sys
+import os
+
+sys.path.insert(0, '/usr/share/ultron-sync')
+
+from device_sync import DeviceSync
+
+def main():
+    if len(sys.argv) < 2:
+        print('Usage: ultron-sync {status|sync|apply|devices}')
+        print()
+        print('Commands:')
+        print('  status   - Show sync status')
+        print('  sync     - Sync now')
+        print('  apply    - Apply synced settings')
+        print('  devices  - List synced devices')
+        sys.exit(1)
+    
+    command = sys.argv[1]
+    
+    if command == 'status':
+        sync = DeviceSync()
+        status = sync.get_sync_status()
+        
+        print('=== Sync Status ===')
+        print(f'Device: {status["device_name"]}')
+        print(f'ID: {status["device_id"]}')
+        print(f'Sync Enabled: {status["sync_enabled"]}')
+        print(f'Last Sync: {status["last_sync"] or "Never"}')
+        print()
+        print('Sync Items:')
+        for item, enabled in status['sync_items'].items():
+            status_icon = '✓' if enabled else '✗'
+            print(f'  {status_icon} {item}')
+    
+    elif command == 'sync':
+        sync = DeviceSync()
+        result = sync.sync_now()
+        
+        if result['success']:
+            print('Sync started...')
+        else:
+            print(f'Sync failed: {result["message"]}')
+    
+    elif command == 'apply':
+        sync = DeviceSync()
+        results = sync.apply_sync()
+        
+        print('=== Applied Settings ===')
+        for result in results:
+            print(f'  ✓ {result}')
+    
+    elif command == 'devices':
+        sync = DeviceSync()
+        status = sync.get_sync_status()
+        
+        print('=== Synced Devices ===')
+        print(f'Current: {status["device_name"]} ({status["device_id"][:8]}...)')
+        # In production, this would fetch from sync server
+    
+    else:
+        print(f'Unknown command: {command}')
+        sys.exit(1)
+
+if __name__ == '__main__':
+    main()

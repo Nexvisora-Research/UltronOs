@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Ultron Updater
+Comment=System and application updates
+Exec=/usr/bin/ultron-updater
+Icon=org.ultron.updater
+Terminal=false
+Type=Application
+Categories=System;PackageManager;GTK;
+Keywords=update;upgrade;system;

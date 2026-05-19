@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Ultron Settings
+Comment=System settings and configuration
+Exec=/usr/bin/ultron-settings
+Icon=org.ultron.settings
+Terminal=false
+Type=Application
+Categories=System;Settings;GTK;
+Keywords=settings;preferences;configuration;system;

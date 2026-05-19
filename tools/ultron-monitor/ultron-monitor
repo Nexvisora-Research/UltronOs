@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+import sys
+import os
+
+sys.path.insert(0, '/usr/share/ultron-monitor')
+
+from system_monitor import SystemMonitor
+
+def main():
+    monitor = SystemMonitor()
+    
+    if len(sys.argv) < 2:
+        print('Usage: ultron-monitor {status|health|history}')
+        print()
+        print('Commands:')
+        print('  status   - Show current system status')
+        print('  health   - Generate health report')
+        print('  history  - Show monitoring history')
+        sys.exit(1)
+    
+    command = sys.argv[1]
+    
+    if command == 'status':
+        status = monitor.get_system_status()
+        print('=== System Status ===')
+        print(f'CPU: {status["cpu"]["usage_percent"]}%')
+        print(f'Memory: {status["memory"]["percent"]}%')
+        print(f'Processes: {len(status["processes"])}')
+        print(f'Uptime: {status["uptime"]["uptime"]}')
+    
+    elif command == 'health':
+        report = monitor.get_health_report()
+        print(f'=== System Health: {report["health"].upper()} ===')
+        
+        if report['issues']:
+            print('\nIssues:')
+            for issue in report['issues']:
+                print(f'  ✗ {issue}')
+        
+        if report['warnings']:
+            print('\nWarnings:')
+            for warning in report['warnings']:
+                print(f'  ⚠ {warning}')
+        
+        if not report['issues'] and not report['warnings']:
+            print('System is healthy!')
+    
+    elif command == 'history':
+        print('Monitoring history available at:')
+        print(f'  {monitor.history_file}')
+    
+    else:
+        print(f'Unknown command: {command}')
+        sys.exit(1)
+
+if __name__ == '__main__':
+    main()

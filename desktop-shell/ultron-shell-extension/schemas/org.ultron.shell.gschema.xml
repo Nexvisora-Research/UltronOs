@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.ultron.shell" path="/org/ultron/shell/">
+    <!-- Taskbar settings -->
+    <key name="taskbar-position" type="s">
+      <default>'bottom'</default>
+      <summary>Taskbar position</summary>
+      <description>Position of the taskbar: 'bottom', 'top', or 'left'</description>
+    </key>
+    <key name="taskbar-size" type="i">
+      <default>48</default>
+      <summary>Taskbar size</summary>
+      <description>Height of the taskbar in pixels</description>
+    </key>
+    <key name="taskbar-autohide" type="b">
+      <default>false</default>
+      <summary>Auto-hide taskbar</summary>
+      <description>Whether to auto-hide the taskbar</description>
+    </key>
+    <key name="taskbar-icon-size" type="i">
+      <default>40</default>
+      <summary>Taskbar icon size</summary>
+      <description>Size of icons in the taskbar</description>
+    </key>
+    <key name="pinned-apps" type="as">
+      <default>['ultron-store.desktop', 'ultron-settings.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.TextEditor.desktop', 'org.gnome.Terminal.desktop']</default>
+      <summary>Pinned applications</summary>
+      <description>List of desktop file IDs for pinned applications</description>
+    </key>
+    
+    <!-- Launcher settings -->
+    <key name="launcher-show-categories" type="b">
+      <default>true</default>
+      <summary>Show categories in launcher</summary>
+      <description>Whether to show application categories in the launcher</description>
+    </key>
+    <key name="launcher-show-recent" type="b">
+      <default>true</default>
+      <summary>Show recent applications</summary>
+      <description>Whether to show recently used applications</description>
+    </key>
+    <key name="launcher-max-recent" type="i">
+      <default>10</default>
+      <summary>Maximum recent applications</summary>
+      <description>Maximum number of recent applications to show</description>
+    </key>
+    
+    <!-- Notification center settings -->
+    <key name="notification-center-enabled" type="b">
+      <default>true</default>
+      <summary>Enable notification center</summary>
+      <description>Whether to enable the notification center</description>
+    </key>
+    <key name="notification-do-not-disturb" type="b">
+      <default>false</default>
+      <summary>Do not disturb mode</summary>
+      <description>Whether to enable do not disturb mode</description>
+    </key>
+    <key name="notification-history-days" type="i">
+      <default>7</default>
+      <summary>Notification history days</summary>
+      <description>Number of days to keep notification history</description>
+    </key>
+    
+    <!-- Quick toggles -->
+    <key name="quick-toggles" type="as">
+      <default>['wifi', 'bluetooth', 'dark-mode', 'night-light', 'do-not-disturb', 'airplane-mode']</default>
+      <summary>Quick toggles</summary>
+      <description>List of enabled quick toggles</description>
+    </key>
+    
+    <!-- System info display -->
+    <key name="show-cpu-usage" type="b">
+      <default>false</default>
+      <summary>Show CPU usage</summary>
+      <description>Whether to show CPU usage in the panel</description>
+    </key>
+    <key name="show-memory-usage" type="b">
+      <default>false</default>
+      <summary>Show memory usage</summary>
+      <description>Whether to show memory usage in the panel</description>
+    </key>
+    <key name="show-network-speed" type="b">
+      <default>false</default>
+      <summary>Show network speed</summary>
+      <description>Whether to show network speed in the panel</description>
+    </key>
+    
+    <!-- Workspace settings -->
+    <key name="workspace-animation" type="b">
+      <default>true</default>
+      <summary>Workspace switching animation</summary>
+      <description>Whether to enable workspace switching animations</description>
+    </key>
+    <key name="workspace-wrap-around" type="b">
+      <default>false</default>
+      <summary>Wrap around workspaces</summary>
+      <description>Whether to wrap around when switching workspaces</description>
+    </key>
+    
+    <!-- Appearance -->
+    <key name="enable-blur-effects" type="b">
+      <default>true</default>
+      <summary>Enable blur effects</summary>
+      <description>Whether to enable acrylic/blur effects in the shell</description>
+    </key>
+    <key name="animation-speed" type="d">
+      <default>1.0</default>
+      <summary>Animation speed multiplier</summary>
+      <description>Multiplier for animation speed (1.0 = normal)</description>
+    </key>
+  </schema>
+</schemalist>

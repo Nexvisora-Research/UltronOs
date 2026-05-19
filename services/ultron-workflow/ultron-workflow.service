@@ -1,0 +1,12 @@
+[Unit]
+Description=Ultron Workflow Engine
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ultron-workflow-daemon
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

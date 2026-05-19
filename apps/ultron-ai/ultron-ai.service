@@ -1,0 +1,14 @@
+[Unit]
+Description=Ultron AI Assistant Service
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ultron-ai-daemon
+Restart=on-failure
+RestartSec=5
+Environment=DISPLAY=:0
+Environment=XDG_RUNTIME_DIR=/run/user/%i
+
+[Install]
+WantedBy=default.target

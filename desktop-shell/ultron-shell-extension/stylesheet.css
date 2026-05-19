@@ -1,0 +1,212 @@
+/* Ultron Shell - GNOME Shell Extension Stylesheet */
+
+/* Taskbar */
+.ultron-taskbar {
+    border-radius: 0;
+}
+
+.ultron-taskbar-background {
+    border-radius: 0;
+}
+
+.ultron-taskbar-apps {
+    spacing: 8px;
+}
+
+.ultron-taskbar-button {
+    padding: 4px;
+    border-radius: 8px;
+    transition-duration: 200ms;
+}
+
+.ultron-taskbar-button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.ultron-taskbar-button:active {
+    background-color: rgba(108, 99, 255, 0.3);
+}
+
+.ultron-taskbar-separator {
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 8px 4px;
+}
+
+.ultron-taskbar-tray {
+    spacing: 8px;
+    padding: 0 8px;
+}
+
+.ultron-taskbar-workspaces {
+    spacing: 6px;
+    padding: 0 8px;
+}
+
+/* Launcher */
+.ultron-launcher {
+    border-radius: 16px;
+}
+
+.ultron-launcher-search {
+    border-radius: 8px;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.ultron-launcher-search:focus {
+    border-color: #6C63FF;
+}
+
+.ultron-launcher-content {
+    spacing: 16px;
+}
+
+.ultron-launcher-categories {
+    spacing: 8px;
+}
+
+.ultron-launcher-category {
+    border-radius: 8px;
+    padding: 6px 12px;
+}
+
+.ultron-launcher-category:hover {
+    background-color: rgba(108, 99, 255, 0.2);
+}
+
+.ultron-launcher-category-button {
+    spacing: 6px;
+}
+
+.ultron-launcher-results {
+    spacing: 8px;
+}
+
+.ultron-launcher-app-button {
+    border-radius: 12px;
+    padding: 12px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ultron-launcher-app-button:hover {
+    background-color: rgba(108, 99, 255, 0.2);
+    border-color: #6C63FF;
+}
+
+.ultron-launcher-recent {
+    spacing: 8px;
+}
+
+.ultron-launcher-section-label {
+    font-size: 12px;
+    color: #A1A1A6;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.ultron-launcher-no-results {
+    font-size: 14px;
+    color: #6E6E73;
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* Notification Center */
+.ultron-notification-center {
+    border-radius: 16px;
+}
+
+.ultron-nc-header {
+    spacing: 12px;
+}
+
+.ultron-nc-clear-button {
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 12px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ultron-nc-clear-button:hover {
+    background-color: rgba(255, 59, 48, 0.2);
+    border-color: #FF3B30;
+}
+
+.ultron-nc-quick-toggles {
+    spacing: 8px;
+}
+
+.ultron-nc-toggle {
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+}
+
+.ultron-nc-notifications {
+    spacing: 8px;
+}
+
+.ultron-nc-notification {
+    border-radius: 12px;
+    padding: 12px;
+    spacing: 12px;
+}
+
+.ultron-nc-notif-close {
+    border-radius: 50%;
+    padding: 4px;
+    width: 24px;
+    height: 24px;
+}
+
+.ultron-nc-notif-close:hover {
+    background-color: rgba(255, 59, 48, 0.3);
+}
+
+/* Window decorations */
+.ultron-window {
+    border-radius: 12px;
+}
+
+/* Quick settings panel enhancements */
+.ultron-quick-settings {
+    border-radius: 16px;
+    padding: 16px;
+}
+
+/* Workspace switcher */
+.ultron-workspace-switcher {
+    border-radius: 12px;
+    padding: 8px;
+    background-color: rgba(28, 28, 30, 0.85);
+    backdrop-filter: blur(20px);
+}
+
+/* Animations */
+.ultron-fade-in {
+    animation: fadeIn 200ms ease-out;
+}
+
+.ultron-slide-up {
+    animation: slideUp 200ms ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

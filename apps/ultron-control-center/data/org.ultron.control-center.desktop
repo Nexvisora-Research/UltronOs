@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Ultron Control Center
+Comment=Quick settings and system controls
+Exec=/usr/bin/ultron-control-center
+Icon=org.ultron.control-center
+Terminal=false
+Type=Application
+Categories=System;Settings;GTK;
+Keywords=control;quick;settings;panel;

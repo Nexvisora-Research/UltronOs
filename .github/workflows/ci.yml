@@ -1,0 +1,95 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          libgtk-4-dev \
+          libadwaita-1-dev \
+          meson \
+          ninja-build \
+          gnome-shell-extensions \
+          gobject-introspection \
+          shellcheck
+    
+    - name: Run build validation
+      run: bash build.sh
+    
+    - name: Run test suite
+      run: bash tests/run_tests.sh
+    
+    - name: Check Python syntax
+      run: |
+        python3 -m compileall apps/ tools/ services/
+    
+    - name: Validate JSON files
+      run: |
+        for f in config/*.json; do
+          python3 -m json.tool "$f" > /dev/null || exit 1
+        done
+    
+    - name: ShellCheck
+      run: |
+        shellcheck scripts/*.sh
+        shellcheck build.sh
+        shellcheck tests/run_tests.sh
+        shellcheck install.sh
+
+  lint:
+    runs-on: ubuntu-24.04
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Install linters
+      run: |
+        pip install ruff mypy
+    
+    - name: Run ruff
+      run: ruff check apps/ tools/ services/
+    
+    - name: Run mypy
+      run: mypy apps/ tools/ services/ --ignore-missing-imports || true
+
+  docs:
+    runs-on: ubuntu-24.04
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Check documentation links
+      run: |
+        echo "Checking README.md..."
+        grep -o 'https://[^ )]*' README.md | head -20
+        echo "Checking CONTRIBUTING.md..."
+        grep -o 'https://[^ )]*' CONTRIBUTING.md | head -20
+    
+    - name: Validate markdown
+      run: |
+        for f in *.md; do
+          echo "Validating $f..."
+          python3 -c "open('$f').read()" || exit 1
+        done

@@ -1,0 +1,12 @@
+[Unit]
+Description=Ultron System Monitor Service
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ultron-monitor-daemon
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

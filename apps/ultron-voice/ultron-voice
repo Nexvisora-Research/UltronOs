@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+import sys
+import os
+
+sys.path.insert(0, '/usr/share/ultron-voice')
+
+from voice_assistant import VoiceAssistant, VoiceCommandBuilder
+
+def main():
+    if len(sys.argv) < 2:
+        print('Usage: ultron-voice {start|stop|speak|commands|test}')
+        print()
+        print('Commands:')
+        print('  start        - Start voice assistant')
+        print('  stop         - Stop voice assistant')
+        print('  speak <text> - Speak text')
+        print('  commands     - List custom commands')
+        print('  test         - Test microphone')
+        sys.exit(1)
+    
+    command = sys.argv[1]
+    
+    if command == 'start':
+        assistant = VoiceAssistant()
+        assistant.start_listening()
+        print('Voice assistant started')
+        print('Say commands or use hotword "Hey Ultron"')
+    
+    elif command == 'stop':
+        assistant = VoiceAssistant()
+        assistant.stop_listening()
+        print('Voice assistant stopped')
+    
+    elif command == 'speak':
+        if len(sys.argv) < 3:
+            print('Usage: ultron-voice speak <text>')
+            sys.exit(1)
+        
+        text = ' '.join(sys.argv[2:])
+        assistant = VoiceAssistant()
+        assistant.speak(text)
+    
+    elif command == 'commands':
+        builder = VoiceCommandBuilder()
+        commands = builder.get_commands()
+        
+        if not commands:
+            print('No custom commands configured')
+        else:
+            print('=== Custom Voice Commands ===')
+            for i, cmd in enumerate(commands):
+                print(f'{i + 1}. Patterns: {", ".join(cmd["patterns"])}')
+                print(f'   Action: {cmd["action"]}')
+    
+    elif command == 'test':
+        assistant = VoiceAssistant()
+        result = assistant.test_microphone()
+        
+        if result['success']:
+            print('Microphone test complete')
+        else:
+            print(f'Microphone test failed: {result["message"]}')
+    
+    else:
+        print(f'Unknown command: {command}')
+        sys.exit(1)
+
+if __name__ == '__main__':
+    main()

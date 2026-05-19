@@ -1,0 +1,24 @@
+[Unit]
+Description=Ultron Gesture Controller Service
+Documentation=man:ultron-gesture(1)
+After=graphical-session.target
+Wants=libinput.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ultron-gesture --daemon
+Restart=on-failure
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+StandardOutput=journal
+StandardError=journal
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/tmp /var/lib/ultron-gesture
+PrivateTmp=true
+
+[Install]
+WantedBy=default.target

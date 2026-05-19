@@ -1,0 +1,191 @@
+# Ultron OS - ISO Build Configuration
+# Configuration for building the Ultron OS ISO image
+
+# Base system
+base:
+  distribution: ubuntu
+  version: "24.04"
+  codename: noble
+  architecture: amd64
+  flavor: desktop
+
+# ISO settings
+iso:
+  name: "ultron-os"
+  version: "1.0.0"
+  label: "ULTRON_OS_1.0.0"
+  publisher: "Ultron OS Project"
+  output_dir: "./build/iso"
+
+# Packages to include
+packages:
+  # Core system
+  core:
+    - ubuntu-desktop-minimal
+    - linux-generic
+    - grub-pc
+    - grub-efi-amd64
+    - shim-signed
+    - casper
+    - lupin-casper
+  
+  # GNOME desktop
+  desktop:
+    - gnome-shell
+    - gnome-session
+    - gdm3
+    - mutter
+    - gnome-control-center
+    - gnome-settings-daemon
+    - gnome-terminal
+    - nautilus
+    - gedit
+  
+  # Pre-installed applications
+  applications:
+    # Browser
+    - brave-browser
+    - firefox
+    
+    # Office
+    - libreoffice-core
+    - libreoffice-writer
+    - libreoffice-calc
+    - libreoffice-impress
+    
+    # Media
+    - vlc
+    - celluloid
+    - rhythmbox
+    
+    # Graphics
+    - gimp
+    - inkscape
+    - eog
+    
+    # Utilities
+    - file-roller
+    - gnome-calculator
+    - gnome-system-monitor
+    - gnome-disk-utility
+    - timeshift
+    
+    # Development
+    - git
+    - curl
+    - wget
+    - python3
+    - python3-pip
+  
+  # Ultron custom packages
+  custom:
+    - ultron-gtk-theme
+    - ultron-icon-theme
+    - ultron-cursor-theme
+    - ultron-welcome
+    - ultron-calamares-branding
+    - ultron-shell
+    - ultron-settings
+    - ultron-control-center
+    - ultron-store
+    - ultron-updater
+    - ultron-driver
+    - ultron-tune
+    - ultron-security
+    - ultron-power
+    - ultron-monitor
+    - ultron-bench
+    - ultron-device
+    - ultron-voice
+    - ultron-workflow
+    - ultron-gesture
+    - ultron-sync
+  
+  # Additional utilities
+  utilities:
+    - flatpak
+    - gnome-tweaks
+    - gnome-software
+    - network-manager
+    - pulseaudio
+    - pipewire
+    - bluez
+    - cups
+    - fonts-noto-color-emoji
+    - language-pack-en
+  
+  # Development tools (optional)
+  development:
+    - build-essential
+    - git
+    - meson
+    - ninja-build
+    - python3
+    - python3-pip
+
+# Services to enable
+services:
+  enabled:
+    - gdm3
+    - NetworkManager
+    - pipewire
+    - pipewire-pulse
+    - bluetooth
+    - cups
+    - flatpak-repo
+  
+  disabled:
+    - apt-daily.timer
+    - apt-daily-upgrade.timer
+
+# Configuration files
+config:
+  # Default user settings
+  user:
+    default_theme: "Ultron-Dark"
+    default_icon_theme: "Ultron-Icons"
+    default_cursor_theme: "Ultron-Cursor"
+    default_wallpaper: "/usr/share/ultron/artwork/wallpaper-default.svg"
+    default_font: "Inter"
+    default_font_size: 11
+  
+  # System settings
+  system:
+    hostname: "ultron-pc"
+    timezone: "UTC"
+    locale: "en_US.UTF-8"
+    keyboard_layout: "us"
+    wayland_default: true
+
+# Post-installation scripts
+post_install:
+  - scripts/setup-base-system.sh
+  - scripts/post-install.sh
+
+# Boot configuration
+boot:
+  grub:
+    timeout: 10
+    default_entry: 0
+    background: "/boot/grub/ultron-background.png"
+    theme: "ultron"
+  
+  kernel_params:
+    - "quiet"
+    - "splash"
+    - "wayland=true"
+
+# Live session configuration
+live:
+  username: "ultron"
+  hostname: "ultron-live"
+  autologin: true
+  session: "gnome"
+  
+  # Desktop customization for live session
+  desktop:
+    show_trash: false
+    show_home: true
+    show_network: true
+    panel_position: "bottom"
+    dock_enabled: true

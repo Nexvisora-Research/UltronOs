@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+import sys
+import os
+
+sys.path.insert(0, '/usr/share/ultron-gesture')
+
+from gesture_controller import GestureController, TouchSettingsPage
+
+def main():
+    if len(sys.argv) < 2:
+        print('Usage: ultron-gesture {status|enable|disable|test}')
+        print()
+        print('Commands:')
+        print('  status    - Show gesture status')
+        print('  enable    - Enable gestures')
+        print('  disable   - Disable gestures')
+        print('  test      - Test gesture recognition')
+        sys.exit(1)
+    
+    command = sys.argv[1]
+    
+    if command == 'status':
+        controller = GestureController()
+        print(f'Gestures: {"Enabled" if controller.enabled else "Disabled"}')
+        print(f'Registered gestures: {len(controller.gestures)}')
+    
+    elif command == 'enable':
+        controller = GestureController()
+        controller.enable()
+        print('Gestures enabled')
+    
+    elif command == 'disable':
+        controller = GestureController()
+        controller.disable()
+        print('Gestures disabled')
+    
+    elif command == 'test':
+        print('Gesture test mode')
+        print('Try swiping, pinching, or tapping on the touch screen')
+        # This would launch a test UI
+    
+    else:
+        print(f'Unknown command: {command}')
+        sys.exit(1)
+
+if __name__ == '__main__':
+    main()

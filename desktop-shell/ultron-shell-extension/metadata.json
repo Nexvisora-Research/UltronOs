@@ -1,0 +1,9 @@
+{
+  "uuid": "ultron-shell@ultron.org",
+  "name": "Ultron Shell",
+  "description": "Custom desktop shell for Ultron OS with enhanced taskbar, launcher, and notification center",
+  "url": "https://ultron.org",
+  "version": 1,
+  "shell-version": ["45", "46", "47"],
+  "settings-schema": "org.ultron.shell"
+}

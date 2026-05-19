@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'Inter', 'Cantarell', sans-serif;
+            background: linear-gradient(135deg, #1C1C1E 0%, #2C2C2E 100%);
+            color: #F5F5F7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            margin: 0;
+            padding: 40px;
+        }
+        h2 {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 0 0 30px 0;
+            color: #6C63FF;
+        }
+        .desktop-preview {
+            width: 100%;
+            max-width: 800px;
+            background: #2C2C2E;
+            border-radius: 12px;
+            border: 1px solid #3A3A3C;
+            overflow: hidden;
+        }
+        .top-bar {
+            background: #1C1C1E;
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #3A3A3C;
+        }
+        .top-bar span {
+            font-size: 14px;
+            color: #A1A1A6;
+        }
+        .desktop-area {
+            height: 400px;
+            background: linear-gradient(135deg, #1C1C1E 0%, #2C2C2E 50%, #1C1C1E 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .taskbar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(28, 28, 30, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+        .taskbar-icon {
+            width: 48px;
+            height: 48px;
+            background: #6C63FF;
+            border-radius: 12px;
+        }
+        p {
+            font-size: 18px;
+            color: #A1A1A6;
+            margin-top: 30px;
+            text-align: center;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Beautiful Desktop Experience</h2>
+    <div class="desktop-preview">
+        <div class="top-bar">
+            <span>Activities</span>
+            <span>12:00 PM</span>
+        </div>
+        <div class="desktop-area">
+            <div class="taskbar">
+                <div class="taskbar-icon"></div>
+                <div class="taskbar-icon" style="background: #00D4AA;"></div>
+                <div class="taskbar-icon" style="background: #4A90D9;"></div>
+                <div class="taskbar-icon" style="background: #F39C12;"></div>
+            </div>
+        </div>
+    </div>
+    <p>Custom desktop shell with intuitive taskbar, launcher, and notification center.</p>
+</body>
+</html>

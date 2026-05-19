@@ -1,0 +1,11 @@
+# Ultron Cursor Theme
+# Theme configuration for xcursorgen
+
+[icon theme]
+name = Ultron-Cursor
+comment = Ultron OS Cursor Theme by Nexvisora Research
+inherits = Adwaita
+example = left_ptr
+
+# Cursor sizes
+sizes = 24,32,48,64

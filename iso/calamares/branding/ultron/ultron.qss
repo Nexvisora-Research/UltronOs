@@ -1,0 +1,192 @@
+/* Ultron OS - Calamares Installer Theme */
+/* Qt Style Sheet for the installer UI */
+
+/* Main window */
+QWidget {
+    background-color: #1C1C1E;
+    color: #F5F5F7;
+    font-family: "Inter", "Cantarell", "Sans-Serif";
+    font-size: 14px;
+}
+
+/* Header */
+QWidget#header {
+    background-color: #2C2C2E;
+    border-bottom: 1px solid #3A3A3C;
+}
+
+QLabel#headerTitle {
+    color: #F5F5F7;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Navigation buttons */
+QPushButton {
+    background-color: #2C2C2E;
+    color: #F5F5F7;
+    border: 1px solid #48484A;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+QPushButton:hover {
+    background-color: #3A3A3C;
+    border-color: #6C63FF;
+}
+
+QPushButton:pressed {
+    background-color: #1C1C1E;
+}
+
+QPushButton#nextButton, QPushButton#installButton {
+    background-color: #6C63FF;
+    color: #FFFFFF;
+    border-color: #6C63FF;
+}
+
+QPushButton#nextButton:hover, QPushButton#installButton:hover {
+    background-color: #7B73FF;
+}
+
+QPushButton#backButton {
+    background-color: transparent;
+    border: 1px solid #48484A;
+}
+
+/* Sidebar */
+QWidget#sidebar {
+    background-color: #1C1C1E;
+    border-right: 1px solid #3A3A3C;
+}
+
+QLabel#stepLabel {
+    color: #A1A1A6;
+    font-size: 12px;
+}
+
+QLabel#stepTitle {
+    color: #F5F5F7;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Progress indicator */
+QProgressBar {
+    background-color: #2C2C2E;
+    border: 1px solid #48484A;
+    border-radius: 4px;
+    height: 8px;
+}
+
+QProgressBar::chunk {
+    background-color: #6C63FF;
+    border-radius: 4px;
+}
+
+/* Input fields */
+QLineEdit, QComboBox, QTextEdit {
+    background-color: #2C2C2E;
+    color: #F5F5F7;
+    border: 1px solid #48484A;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+
+QLineEdit:focus, QComboBox:focus, QTextEdit:focus {
+    border-color: #6C63FF;
+}
+
+/* Checkboxes and radio buttons */
+QCheckBox, QRadioButton {
+    color: #F5F5F7;
+    spacing: 8px;
+}
+
+QCheckBox::indicator, QRadioButton::indicator {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #48484A;
+    border-radius: 4px;
+    background-color: #2C2C2E;
+}
+
+QCheckBox::indicator:checked, QRadioButton::indicator:checked {
+    background-color: #6C63FF;
+    border-color: #6C63FF;
+}
+
+QRadioButton::indicator {
+    border-radius: 10px;
+}
+
+/* Lists and trees */
+QListView, QTreeView, QTableView {
+    background-color: #2C2C2E;
+    color: #F5F5F7;
+    border: 1px solid #48484A;
+    border-radius: 8px;
+    alternate-background-color: #3A3A3C;
+}
+
+QListView::item:selected, QTreeView::item:selected, QTableView::item:selected {
+    background-color: #6C63FF;
+    color: #FFFFFF;
+}
+
+/* Scrollbars */
+QScrollBar:vertical {
+    background-color: #1C1C1E;
+    width: 12px;
+    border-radius: 6px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #48484A;
+    border-radius: 6px;
+    min-height: 32px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #6C63FF;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0;
+}
+
+/* Slideshow */
+QWidget#slideshow {
+    background-color: #1C1C1E;
+}
+
+QLabel#slideText {
+    color: #F5F5F7;
+    font-size: 16px;
+}
+
+/* Status messages */
+QLabel#statusMessage {
+    color: #A1A1A6;
+    font-size: 12px;
+}
+
+/* Dialogs */
+QDialog {
+    background-color: #2C2C2E;
+    border-radius: 12px;
+}
+
+QMessageBox {
+    background-color: #2C2C2E;
+}
+
+/* Tooltips */
+QToolTip {
+    background-color: #2C2C2E;
+    color: #F5F5F7;
+    border: 1px solid #48484A;
+    border-radius: 8px;
+    padding: 8px;
+}

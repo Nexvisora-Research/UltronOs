@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+import sys
+import os
+
+sys.path.insert(0, '/usr/share/ultron-power')
+
+from power_manager import PowerManager
+
+def main():
+    manager = PowerManager()
+    
+    if len(sys.argv) < 2:
+        print('Usage: ultron-power {status|profile|report}')
+        print()
+        print('Commands:')
+        print('  status              - Show battery status')
+        print('  profile <name>      - Set power profile (performance/balanced/powersave)')
+        print('  report              - Generate power report')
+        sys.exit(1)
+    
+    command = sys.argv[1]
+    
+    if command == 'status':
+        battery = manager.get_battery_info()
+        print('=== Battery Status ===')
+        print(f'Present: {"Yes" if battery["present"] else "No"}')
+        print(f'Charge: {battery["percentage"]}%')
+        print(f'Charging: {"Yes" if battery["charging"] else "No"}')
+        print(f'Health: {battery["health"]}')
+        if battery['time_to_empty']:
+            print(f'Time to empty: {battery["time_to_empty"]}')
+        if battery['time_to_full']:
+            print(f'Time to full: {battery["time_to_full"]}')
+    
+    elif command == 'profile':
+        if len(sys.argv) < 3:
+            print('Usage: ultron-power profile <performance|balanced|powersave>')
+            sys.exit(1)
+        
+        profile = sys.argv[2]
+        result = manager.set_profile(profile)
+        print(f'Switched to {profile} profile')
+        for change in result['changes']:
+            print(f'  ✓ {change}')
+    
+    elif command == 'report':
+        report = manager.get_power_report()
+        print('=== Power Report ===')
+        print(f'Current profile: {report["current_profile"]}')
+        print(f'Battery: {report["battery"]["percentage"]}%')
+        print(f'CPU governor: {report["cpu_governor"]}')
+        print(f'Brightness: {report["screen_brightness"]}%')
+        print(f'Running processes: {report["running_processes"]}')
+        print(f'Power-hungry apps: {len(report["power_hungry_apps"])}')
+    
+    else:
+        print(f'Unknown command: {command}')
+        sys.exit(1)
+
+if __name__ == '__main__':
+    main()

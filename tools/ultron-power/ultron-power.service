@@ -1,0 +1,12 @@
+[Unit]
+Description=Ultron Power Management Service
+After=systemd-logind.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ultron-power-daemon
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,12 @@
+[Unit]
+Description=Ultron Device Sync Service
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ultron-sync-daemon
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=default.target

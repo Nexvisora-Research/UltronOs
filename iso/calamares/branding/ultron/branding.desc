@@ -1,0 +1,40 @@
+# Ultron OS - Calamares Branding Configuration
+# Visual and branding settings for the installer
+
+componentName: "ultron-calamares"
+shortProductName: "Ultron OS"
+version: "1.0.0"
+shortVersion: "1.0"
+
+# Product URLs
+productUrl: "https://ultron.org"
+bugReportUrl: "https://ultron.org/bugs"
+knownIssuesUrl: "https://ultron.org/known-issues"
+releaseNotesUrl: "https://ultron.org/release-notes"
+donateUrl: "https://ultron.org/donate"
+supportUrl: "https://ultron.org/support"
+privacyPolicyUrl: "https://ultron.org/privacy"
+licenseUrl: "https://ultron.org/license"
+onlineHelpUrl: "https://ultron.org/help"
+
+# Installer branding
+installerIcon: "ultron-installer"
+windowIcon: "ultron-installer"
+
+# Slideshow configuration
+slideshow:
+  API: "qs6"
+  transitionDuration: 1.5
+  stayOnSlide: 30
+  slides:
+    - welcome.html
+    - features.html
+    - desktop.html
+    - apps.html
+    - finish.html
+
+# Theme
+style: "ultron.qss"
+
+# Panel sidebar visibility
+showSizeDetails: true

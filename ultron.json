@@ -1,0 +1,12 @@
+{
+  "name": "Ultron OS",
+  "version": "1.0.0",
+  "base": "Ubuntu 24.04 LTS",
+  "architecture": "x86_64",
+  "description": "A modern Linux distribution combining the best of Windows 11, macOS, and GNOME with a focus on design and user experience",
+  "developer": "Nexvisora Research",
+  "developer_url": "https://nexvisora.research",
+  "website": "https://ultron.org",
+  "license": "GPL-3.0",
+  "copyright": "© 2026 Nexvisora Research. All rights reserved."
+}

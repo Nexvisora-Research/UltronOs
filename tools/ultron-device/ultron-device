@@ -1,0 +1,65 @@
+#!/usr/bin/env python3
+import sys
+import os
+
+sys.path.insert(0, '/usr/share/ultron-device')
+
+from device_manager import DeviceManager, InterfaceScaler
+
+def main():
+    if len(sys.argv) < 2:
+        print('Usage: ultron-device {detect|scale|layout|config}')
+        print()
+        print('Commands:')
+        print('  detect       - Auto-detect device type and capabilities')
+        print('  scale        - Apply UI scaling based on device')
+        print('  layout       - Apply adaptive layout')
+        print('  config       - Show current device configuration')
+        sys.exit(1)
+    
+    command = sys.argv[1]
+    
+    if command == 'detect':
+        manager = DeviceManager()
+        info = manager.detect_device()
+        
+        print('=== Device Detection ===')
+        print(f'Type: {info["type"]}')
+        print(f'Form Factor: {info["form_factor"]}')
+        print(f'Screen Size: {info["screen_size"]}')
+        print(f'Touch Enabled: {info["touch_enabled"]}')
+        print(f'Resolution: {info["resolution"][0]}x{info["resolution"][1]}')
+        print(f'DPI: {info["dpi"]}')
+        print(f'Battery: {"Yes" if info["battery_present"] else "No"}')
+        print(f'Sensors: {", ".join(info["sensors"]) if info["sensors"] else "None"}')
+    
+    elif command == 'scale':
+        scaler = InterfaceScaler()
+        results = scaler.apply_scaling()
+        
+        print('=== UI Scaling Applied ===')
+        for result in results:
+            print(f'  ✓ {result}')
+    
+    elif command == 'layout':
+        scaler = InterfaceScaler()
+        results = scaler.apply_layout()
+        
+        print('=== Layout Applied ===')
+        for result in results:
+            print(f'  ✓ {result}')
+    
+    elif command == 'config':
+        manager = DeviceManager()
+        config = manager.get_adaptive_config()
+        
+        print('=== Adaptive Configuration ===')
+        for key, value in config.items():
+            print(f'{key}: {value}')
+    
+    else:
+        print(f'Unknown command: {command}')
+        sys.exit(1)
+
+if __name__ == '__main__':
+    main()

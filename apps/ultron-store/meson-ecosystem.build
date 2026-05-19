@@ -1,0 +1,26 @@
+project('ultron-ecosystem', 'c',
+  version: '1.0.0',
+  meson_version: '>= 0.57.0'
+)
+
+# Install cloud service
+install_subdir(
+  '../services/ultron-cloud/src',
+  install_dir: join_paths(get_option('prefix'), 'share', 'ultron-cloud')
+)
+
+install_data(
+  '../services/ultron-cloud/ultron-cloud.service',
+  install_dir: join_paths(get_option('prefix'), 'lib', 'systemd', 'user')
+)
+
+# Install AI assistant
+install_subdir(
+  '../apps/ultron-ai/src',
+  install_dir: join_paths(get_option('prefix'), 'share', 'ultron-ai')
+)
+
+install_data(
+  '../apps/ultron-ai/ultron-ai.service',
+  install_dir: join_paths(get_option('prefix'), 'lib', 'systemd', 'user')
+)

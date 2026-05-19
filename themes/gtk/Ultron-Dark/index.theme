@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Ultron-Dark
+Comment=Ultron OS Dark Theme
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Ultron-Dark
+IconTheme=Ultron-Icons
+CursorTheme=Ultron-Cursor
+ButtonLayout=close,minimize,maximize:

@@ -1,0 +1,24 @@
+[Unit]
+Description=Ultron Voice Assistant Service
+Documentation=man:ultron-voice(1)
+After=pulseaudio.service pipewire.service
+Wants=pulseaudio.service pipewire.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/ultron-voice --daemon
+Restart=on-failure
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+StandardOutput=journal
+StandardError=journal
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/var/lib/ultron-voice /tmp
+PrivateTmp=true
+
+[Install]
+WantedBy=default.target

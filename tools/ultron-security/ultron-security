@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+import sys
+import os
+
+sys.path.insert(0, '/usr/share/ultron-security')
+
+from security_hardener import SecurityHardener
+
+def main():
+    hardener = SecurityHardener()
+    
+    if len(sys.argv) < 2:
+        print('Usage: ultron-security {audit|harden|firewall|apparmor}')
+        print()
+        print('Commands:')
+        print('  audit      - Perform security audit')
+        print('  harden     - Apply all security hardening')
+        print('  firewall   - Configure firewall')
+        print('  apparmor   - Configure AppArmor')
+        sys.exit(1)
+    
+    command = sys.argv[1]
+    
+    if command == 'audit':
+        audit = hardener.audit_system()
+        print('=== Security Audit ===')
+        print(f'Firewall: {"Enabled" if audit["firewall_status"]["enabled"] else "Disabled"}')
+        print(f'AppArmor: {"Enabled" if audit["apparmor_status"]["enabled"] else "Disabled"}')
+        print(f'Open ports: {len(audit["open_ports"])}')
+        print(f'User accounts: {len(audit["user_accounts"])}')
+    
+    elif command == 'harden':
+        print('Applying security hardening...')
+        results = hardener.apply_all_hardening()
+        for category, items in results.items():
+            print(f'\n{category.upper()}:')
+            for item in items:
+                print(f'  ✓ {item}')
+    
+    elif command == 'firewall':
+        print('Configuring firewall...')
+        results = hardener.harden_firewall()
+        for item in results:
+            print(f'  ✓ {item}')
+    
+    elif command == 'apparmor':
+        print('Configuring AppArmor...')
+        results = hardener.harden_apparmor()
+        for item in results:
+            print(f'  ✓ {item}')
+    
+    else:
+        print(f'Unknown command: {command}')
+        sys.exit(1)
+
+if __name__ == '__main__':
+    main()

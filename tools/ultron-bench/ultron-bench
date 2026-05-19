@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+import sys
+import os
+
+sys.path.insert(0, '/usr/share/ultron-bench')
+
+from benchmark import SystemBenchmark
+from update_tester import UpdateTester
+
+def main():
+    if len(sys.argv) < 2:
+        print('Usage: ultron-bench {run|compare|test-updates}')
+        print()
+        print('Commands:')
+        print('  run           - Run all benchmarks')
+        print('  compare       - Compare with previous results')
+        print('  test-updates  - Test pending updates')
+        sys.exit(1)
+    
+    command = sys.argv[1]
+    
+    if command == 'run':
+        bench = SystemBenchmark()
+        print('Running benchmarks...')
+        results = bench.run_all_benchmarks()
+        
+        print('\n=== Benchmark Results ===')
+        print(f'CPU Single-thread: {results["cpu"]["single_thread_loop"]:.3f}s')
+        print(f'CPU Multi-thread: {results["cpu"]["multi_thread"]:.3f}s')
+        print(f'Disk Write: {results["disk"]["write_speed_mbps"]:.2f} MB/s')
+        print(f'Disk Read: {results["disk"]["read_speed_mbps"]:.2f} MB/s')
+        
+        if results['app_launch']:
+            print('\nApp Launch Times:')
+            for app, times in results['app_launch'].items():
+                print(f'  {app}: {times["avg"]:.3f}s avg')
+    
+    elif command == 'compare':
+        bench = SystemBenchmark()
+        comparison = bench.get_comparison()
+        
+        print('=== Benchmark Comparison ===')
+        print(comparison.get('message', 'Comparison data:'))
+    
+    elif command == 'test-updates':
+        tester = UpdateTester()
+        print('Testing updates...')
+        results = tester.test_updates()
+        
+        print(f'\nOverall: {results["overall"].upper()}')
+        for test in results['tests']:
+            print(f'\n{test["name"]}: {test["status"].upper()}')
+            for detail in test['details']:
+                print(f'  {detail}')
+    
+    else:
+        print(f'Unknown command: {command}')
+        sys.exit(1)
+
+if __name__ == '__main__':
+    main()

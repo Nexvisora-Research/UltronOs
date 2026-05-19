@@ -121,7 +121,7 @@ apt install -y \
     ubuntu-desktop-minimal \
     linux-generic \
     grub-pc grub-efi-amd64 shim-signed \
-    casper lupin-casper \
+    casper \
     gnome-shell gnome-session gdm3 mutter \
     gnome-control-center gnome-settings-daemon \
     gnome-terminal nautilus gedit \

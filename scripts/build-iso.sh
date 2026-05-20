@@ -74,7 +74,7 @@ ok "Filesystems mounted"
 
 # Cleanup function
 cleanup() {
-    log "Unmounting filesystems..."
+    log "Unmounting remaining filesystems..."
     umount -l "$CHROOT_DIR/tmp" 2>/dev/null || true
     umount -l "$CHROOT_DIR/dev/pts" 2>/dev/null || true
     umount -l "$CHROOT_DIR/dev" 2>/dev/null || true
@@ -344,8 +344,18 @@ ok "Live session configured"
 # Step 9: Build squashfs
 log "Step 9/12: Building squashfs filesystem..."
 mkdir -p "$BUILD_DIR/iso/casper"
+
+# Unmount virtual filesystems before squashfs
+umount -l "$CHROOT_DIR/tmp" 2>/dev/null || true
+umount -l "$CHROOT_DIR/dev/pts" 2>/dev/null || true
+umount -l "$CHROOT_DIR/dev" 2>/dev/null || true
+umount -l "$CHROOT_DIR/sys" 2>/dev/null || true
+umount -l "$CHROOT_DIR/proc" 2>/dev/null || true
+
+# Build squashfs excluding virtual filesystems
 mksquashfs "$CHROOT_DIR" "$BUILD_DIR/iso/casper/filesystem.squashfs" \
-    -comp zstd -b 1048576 -noappend -Xcompression-level 3
+    -comp zstd -b 1048576 -noappend -Xcompression-level 3 \
+    -e proc sys dev run tmp
 ok "Squashfs built"
 
 # Generate filesystem manifest

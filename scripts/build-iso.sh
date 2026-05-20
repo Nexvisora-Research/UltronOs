@@ -328,7 +328,7 @@ LIVE_MEDIA_PATH=/casper
 EOF
 
 # Create live user
-chroot "$CHROOT_DIR" useradd -m -s /bin/bash -G sudo,adm,cdrom,dip,plugdev,lpadmin,sambashare ultron
+chroot "$CHROOT_DIR" useradd -m -s /bin/bash -G sudo,adm,cdrom,dip,plugdev,lpadmin ultron
 chroot "$CHROOT_DIR" bash -c 'echo "ultron:ultron" | chpasswd'
 chroot "$CHROOT_DIR" bash -c 'echo "ultron ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers'
 

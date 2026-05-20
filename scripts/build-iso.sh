@@ -290,13 +290,14 @@ picture-uri=file:///usr/share/ultron/artwork/wallpaper-default.svg
 picture-uri-dark=file:///usr/share/ultron/artwork/wallpaper-default.svg
 EOF
 
-# Enable services
-systemctl enable gdm3
-systemctl enable NetworkManager
-systemctl enable pipewire
-systemctl enable pipewire-pulse
-systemctl enable bluetooth
-systemctl enable cups
+# Enable services (ignore chroot warnings)
+systemctl enable gdm3 2>/dev/null || true
+systemctl enable NetworkManager 2>/dev/null || true
+systemctl enable bluetooth 2>/dev/null || true
+systemctl enable cups 2>/dev/null || true
+
+# Pipewire is enabled by default in Ubuntu 24.04 via user session
+# No need to enable system services for it
 
 # Set up GRUB
 cat > /etc/default/grub << 'EOF'

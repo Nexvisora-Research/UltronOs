@@ -345,7 +345,7 @@ ok "Live session configured"
 log "Step 9/12: Building squashfs filesystem..."
 mkdir -p "$BUILD_DIR/iso/casper"
 mksquashfs "$CHROOT_DIR" "$BUILD_DIR/iso/casper/filesystem.squashfs" \
-    -comp xz -b 1048576 -noappend -Xdict-size 100%
+    -comp zstd -b 1048576 -noappend -Xcompression-level 3
 ok "Squashfs built"
 
 # Generate filesystem manifest

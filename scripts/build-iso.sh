@@ -368,14 +368,22 @@ mkdir -p "$BUILD_DIR/iso/isolinux"
 mkdir -p "$BUILD_DIR/iso/boot/grub"
 
 # Copy kernel and initrd
-KERNEL_VER=$(ls "$CHROOT_DIR/boot/vmlinuz-"* 2>/dev/null | head -1 | xargs basename 2>/dev/null)
+KERNEL_VER=""
+for f in "$CHROOT_DIR"/boot/vmlinuz-*; do
+    [ -f "$f" ] && KERNEL_VER=$(basename "$f") && break
+done
+
 if [ -n "$KERNEL_VER" ]; then
     cp "$CHROOT_DIR/boot/$KERNEL_VER" "$BUILD_DIR/iso/casper/vmlinuz"
     cp "$CHROOT_DIR/boot/initrd.img-${KERNEL_VER#vmlinuz-}" "$BUILD_DIR/iso/casper/initrd"
 else
     # Fallback: use host kernel if chroot doesn't have one
-    cp /boot/vmlinuz* "$BUILD_DIR/iso/casper/vmlinuz"
-    cp /boot/initrd* "$BUILD_DIR/iso/casper/initrd"
+    for f in /boot/vmlinuz-*; do
+        [ -f "$f" ] && cp "$f" "$BUILD_DIR/iso/casper/vmlinuz" && break
+    done
+    for f in /boot/initrd.img-*; do
+        [ -f "$f" ] && cp "$f" "$BUILD_DIR/iso/casper/initrd" && break
+    done
 fi
 
 # GRUB configuration
